@@ -136,18 +136,22 @@ body {
 
 .online{
  border: 1px solid black;
- background-color: red;
+ background-color: black;
  padding-left: 3px;
  padding-right: 1px;
 }
 
 .online .btn-primary{
-  background-color: orange;
+  background-color: #cb202d;
   color: black;
   height: 30px;
   width: 135px;
   left: auto;
   right: auto;
+}
+
+.food:hover{
+  color: red;
 }
 
 .btn-primary:hover{
@@ -188,17 +192,22 @@ body {
 
 .table{
   color: green;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.sorted{
+  color: green
 }
 
 .left{
   position: absolute;
-  align-items: left;
-  border: 1px solid red;
-  height: auto;
-  width: 250px;
-  background-color: white;
-  font-size: 18px;
- padding-top: 10px;
- padding-left: 5px;
- padding-right: 0px;
+  background: #FFF;
+  box-shadow: none;
+  margin: 1rem 0;
+  width: 230px;
+  padding: 1em;
+  border-radius: .28571429rem;
+  border: 1px solid #e7e7e7;
+  height: 800px;
 }
