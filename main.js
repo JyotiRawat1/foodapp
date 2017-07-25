@@ -3,7 +3,30 @@
 // The first argument we pass to the function is the name of the app we mentioned in 'ng-app' directive
 // The second parameter is an array of 'extra powers' we want to add to our app - we'll see this in future classes
 
-var foodieApp = angular.module('foodieApp',[]);
+var foodieApp = angular.module('foodieApp',['ngRoute']);
+
+
+
+foodieApp.config(function ($routeProvider) {
+	$routeProvider
+	.when('/',{
+		templateUrl: 'pages/login.html',
+		controller: 'loginController'
+	})
+	.when('/home',{
+		templateUrl: 'pages/home.html',
+		controller: 'mainController'
+	})
+})
+
+foodieApp.controller('loginController',function($scope) {
+
+
+
+
+})
+
+
 foodieApp.controller('mainController',function($scope) {
   $scope.restaurants = [{
   	name: 'Farzi Cafe',
