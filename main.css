@@ -22,6 +22,15 @@ body {
     align-items: center;
 }
 
+.bestDish .button {
+    display: inline-block;
+    background-color:#cb202d;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 #app .navbar {
     color: white;
     background-color: #cb202d;
@@ -80,6 +89,25 @@ body {
 
 .rest-wrapper .image img {
     border-radius: 4px;
+}
+
+.rest-wrapper .image img:hover {
+    height: 110px;
+    width: 110px;
+}
+
+.image1{
+  margin-top: 10px;
+
+}
+ .image1 img {
+    border-radius: 10px;
+}
+
+.image1 img:hover {
+   border-radius: 20px;
+   height: 110px;
+   width: 210px;
 }
 
 .rest-wrapper .rest-name {
