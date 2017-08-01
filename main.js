@@ -23,7 +23,7 @@ foodieApp.config(function ($routeProvider) {
 	})
 })
 
-foodieApp.controller('restaurantController',function($scope,$routeParams) {
+foodieApp.controller('restaurantController',function($scope,$routeParams,$http) {
 	$scope.restaurantId = $routeParams.id;
 	var restaurants = [{
   	name: 'Farzi Cafe',
@@ -33,7 +33,10 @@ foodieApp.controller('restaurantController',function($scope,$routeParams) {
   	vote: '4.2',
     NoOfVote: '460 votes',
     reviews:  '369 reviews',
-
+		bestDish: {
+									name: 'Chicken Tikka',
+									image: 'http://farzicafe.ae/images/gallery/Spinach-and-ricotta-quesadillas-water-chestnut-and-cucumber-salsa.jpg'
+							},
   	cuisines: 'Modern Indian',
   	cost: '2200',
   	hours: '12 Noon to 1 AM (Mon-Sun)',
@@ -67,7 +70,10 @@ foodieApp.controller('restaurantController',function($scope,$routeParams) {
     vote: '3.4',
     NoOfVote: '1068 votes',
     reviews:  '678 reviews',
-
+		bestDish: {
+									name: 'Ma Po Tofu 麻婆豆腐 ',
+									image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQveZPbJeeT52V1CTFzadlP39v4XJ-noqYy4zsSThnwECKLkJMK'
+							},
     cuisines: 'Chinese, Japanese, Italian, Seafood',
     cost: '1500',
     hours: '11 AM to 11:30 PM (Mon-Sun)',
@@ -79,6 +85,10 @@ foodieApp.controller('restaurantController',function($scope,$routeParams) {
     location: 'Kamla Nagar',
     category: 'QUICK BITES',
     vote: '3.8',
+		bestDish: {
+									name: 'M0m0$',
+									image: 'http://files.hungryforever.com/wp-content/uploads/2016/09/23155922/best-momos-in-bangalore.jpg'
+				      },
     NoOfVote: '760 votes',
     reviews:  '649 reviews',
 
@@ -95,18 +105,55 @@ foodieApp.controller('restaurantController',function($scope,$routeParams) {
     vote: '5.2',
     NoOfVote: '860 votes',
     reviews:  '760 reviews',
-
+		bestDish: {
+									name: 'Peking Roasted Duck 北京烤鸭 ...',
+									image: 'http://touristcompanies.org/wp-content/uploads/2016/04/4721.jpg'
+							},
     cuisines: 'Chinese, Thai',
     cost: '1000',
     hours: '11:30 AM to 11 PM (Mon-Thu),11:30 AM to 10:45 PM',
     image: 'img/bag.jpg'
   }]
 
+
 	$scope.restaurant = restaurants[$routeParams.id - 1];
+	$scope.ingredients = [];
+
 	$scope.getIngredients = function(url){
-		console.log(url);
+						var data = '{"inputs":[{"data":{"image":{"url":"' + url + '"}}}]}'
+									    $http({
+									        'method': 'POST',
+									        'url': 'https://api.clarifai.com/v2/models/bd367be194cf45149e75f01d59f77ba7/outputs',
+									        'headers': {
+									            'Authorization': 'Key c284f682f03645c6ab0b23e3d4dde2a3',
+									            'Content-Type': 'application/json'
+									        },
+															        'data': data,
+																		})
+																		.then( function (response) {
+																			console.log(response);
+
+														          {
+														          var ingredients = response.data.outputs[0].data.concepts;
+																			//console.log(ingredients);
+														         // var list = '';
+
+														          for (var i =0;i < ingredients.length;i++) {
+																				$scope.ingredients.push(ingredients[i].name)
+																				//console.log($scope.ingredients);
+														           //   list += '<div class="ingredient">' + ingredients[i].name + '</div>'
+														          }
+																			console.log(list);
+														          //$('.ingredients').html(list);
+														      }
+																},
+																	function (xhr) {
+													            console.log(xhr);
+													        });
 }
 })
+
+
 
 
 foodieApp.controller('loginController',function($scope,$location) {

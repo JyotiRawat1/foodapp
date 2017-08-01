@@ -48,6 +48,18 @@
     <div class="rating">
         <strong>{{restaurant.vote}}</strong>
     </div>
+
+            <div ng-if="ingredients">
+                    <ol>
+                    <li class="Ilist" ng-repeat="ingredient in ingredients">
+                    {{ingredient}}
+                    </li>
+                    </ol>
+            </div>
+
+            <div class="image">
+                <img ng-src="{{restaurant.bestDish.image}}" height="300" width="550">
+            </div>
   </div>
 
 <div ng-hide="restaurant.name"> 404- Restaurant Not found </div>

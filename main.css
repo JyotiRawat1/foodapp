@@ -96,6 +96,15 @@ body {
     width: 110px;
 }
 
+ .image img:hover {
+    height: 375px;
+    width: 560px;
+}
+.Ilist:hover{
+  font-size: 20px;
+  color: red;
+}
+
 .image1{
   margin-top: 10px;
 
