@@ -21,7 +21,57 @@ foodieApp.config(function ($routeProvider) {
 		templateUrl: 'pages/restaurant.html',
 		controller: 'restaurantController'
 	})
+	.when('/foodlist',{
+		templateUrl: 'pages/foodlist.html',
+		controller: 'foodlistController'
+	})
 })
+
+foodieApp.controller('foodlistController',function($scope,$routeParams,$http) {
+	$scope.foodlistId = $routeParams.id;
+$scope.foodlists = [{
+	 name: 'Pizza',
+	 parg: 'Pizza is a yeasted flatbread generally topped with tomato sauce and cheese and baked in an oven. It is commonly topped with a selection of meats, vegetables and condiments. The term was first recorded in the 10th century, in a Latin manuscript from Gaeta in Central Italy.',
+	 image: 'img/tenor.gif',
+	 number: '1'},
+ {
+	 name: 'huhh',
+	 parg: '',
+	 image: 'http://farzicafe.ae/images/gallery/Spinach-and-ricotta-quesadillas-water-chestnut-and-cucumber-salsa.jpg',
+	 number: '2'}]
+
+
+	 $scope.ingredients = [];
+
+	 $scope.getIngredients = function(url){
+		 //ajax call
+		 var data = '{"inputs":[{"data":{"image":{"url":"' + url +'"}}}]}'
+
+				 $http({
+		         'method': 'POST',
+		         'url': 'https://api.clarifai.com/v2/models/bd367be194cf45149e75f01d59f77ba7/outputs',
+		         'headers': {
+		             'Authorization': 'Key c284f682f03645c6ab0b23e3d4dde2a3',
+		             'Content-Type': 'application/json'
+		         },
+		         'data': data,
+					 }).then(function (response) 
+	 		           {
+	 		           var ingredients = response.data.outputs[0].data.concepts;
+	 		           var list = '';
+	 		           for (var i =0;i < ingredients.length;i++) {
+	 		               list += '<div class="ingredient">' + ingredients[i].name + '</div>'
+	 		           }
+	 		           $('.ingredients').html(list);
+	 		       }, function (xhr) {
+		 		             console.log(xhr);
+									 });
+}
+})
+
+
+
+
 
 foodieApp.controller('restaurantController',function($scope,$routeParams,$http) {
 	$scope.restaurantId = $routeParams.id;

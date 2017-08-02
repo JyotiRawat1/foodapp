@@ -1,0 +1,30 @@
+
+<div class="topten" ng-controller="foodlistController">
+
+
+  <small class="foodline"><b>All Top Ten Lists > Foods</b></small>
+  <h1>Top Ten Favourite Foods</h1>
+
+<div ng-repeat="foodlist in foodlists">
+<div class="fooditems">
+    <span> <img ng-src="{{foodlist.image}}" height="200" width="300"></span>
+  <div>  <span class="number">{{foodlist.number}}</span>
+      <span class="name">{{foodlist.name}}</span></div>
+      <div class="parg">{{foodlist.parg}}</div>
+
+</div>
+<div class="buttoning" ng-click="getIngredients(foodlist.image)">Get Ingredients</div>
+
+
+</div>
+
+<div ng-if="ingredients">
+        <ol>
+        <li class="Ilist" ng-repeat="ingredient in ingredients">
+        {{ingredient}}
+        </li>
+        </ol>
+</div>
+
+
+</div>
